@@ -1,31 +1,33 @@
-import { View, StyleSheet, Pressable } from "react-native";
-import Text from "./Text";
+import { View, StyleSheet } from "react-native";
 import Constants from "expo-constants";
 import theme from "../theme";
+import Tab from "./Tab";
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
     backgroundColor: theme.colors.textPrimary,
+    flexDirection: "row",
   },
-  text: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    paddingLeft: 10,
-    paddingRight: 10,
-    color: "white",
-  },
-  // ...
 });
+
+const views = [
+  {
+    path: "/",
+    label: "Repositories",
+  },
+  {
+    path: "/signin",
+    label: "Sign In",
+  },
+];
 
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <Pressable>
-        <Text fontWeight="bold" fontSize="subheading" style={styles.text}>
-          Repositories
-        </Text>
-      </Pressable>
+      {views.map(({ path, label }) => (
+        <Tab key={path} path={path} label={label} />
+      ))}
     </View>
   );
 };
